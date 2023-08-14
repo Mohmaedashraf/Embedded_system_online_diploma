@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include <stdlib.h>
+
+void main (){
+	char w[100];
+
+	printf("enter the string: ");
+	fflush(stdin);fflush(stdout);
+	gets(w);
+
+	int i,j=0;
+	char x;
+	printf("enter a character to be searched: ");
+	fflush(stdin);fflush(stdout);
+
+	scanf("%c",&x);
+
+	for(i=0;i<strlen(w);i++)
+		if(w[i]==x){
+			j++;
+		}
+	printf("frequancy of %c = %d",x,j);
+}

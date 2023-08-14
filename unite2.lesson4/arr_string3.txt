@@ -1,0 +1,17 @@
+#include<stdio.h>
+#include <stdlib.h>
+
+void main (){
+	char w[1000];
+	printf("enter a string: ");
+	fflush(stdin);fflush(stdout);
+	gets(w);
+	char reverse[1000];
+	int i;
+	int x=strlen(w)-1;
+	for(i=x;i>=0;i--){
+		reverse[x-i]=w[i];
+	}
+	printf("reverse string : %s",&reverse);
+
+}
