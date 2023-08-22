@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Ssum{
+	float feet;
+	float inch;
+};
+struct Ssum read1(){
+	struct Ssum sum;
+	printf("Enter information for 1st distance\n");
+	printf("enter feet : ");
+	scanf("%f",&sum.feet);
+	printf("enter inch : ");
+	scanf("%f",&sum.inch);
+	return sum;
+}
+struct Ssum read2(){
+	struct Ssum sum;
+	printf("Enter information for 2st distance\n");
+	printf("enter feet : ");
+	scanf("%f",&sum.feet);
+	printf("enter inch : ");
+	scanf("%f",&sum.inch);
+	return sum;
+}
+struct Ssum print_sum(struct Ssum sum1,struct Ssum sum2 ){
+	struct Ssum sum;
+	sum.feet=sum1.feet+sum2.feet;
+	sum.inch=sum1.inch+sum2.inch;
+	if(sum.inch >=12){
+		sum.inch -=12;
+		sum.feet++;
+	}
+	return sum;
+}
+void main() {
+	setbuf(stdout,NULL);
+	struct Ssum sum,sum1,sum2;
+	sum1=read1();
+	sum2=read2();
+	sum=print_sum(sum1,sum2);
+	printf("sum of distance = %.2f'-%.2f\"\n",sum.feet,sum.inch );
+}
