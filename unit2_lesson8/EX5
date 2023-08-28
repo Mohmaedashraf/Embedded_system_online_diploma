@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <string.h>
+#define SIZE    100
+typedef struct {
+	char employeeName [SIZE];
+	int employeeID;
+} testData;
+void main()
+{
+	testData t1;
+	t1.employeeID = 1002;
+	strcpy(t1.employeeName, "Alex");
+
+	testData *Ps [2];
+	Ps[0] = &t1;
+	testData* *PPs1 = &Ps[0];
+	printf("Employee Name : %s\n",(**PPs1).employeeName);
+	printf("Employee ID : %d\n", (**PPs1).employeeID);
+}

@@ -1,0 +1,13 @@
+	#include <stdio.h>
+#include <stdlib.h>
+void main() {
+	char alph ='A';
+	char* p=&alph;
+	int i;
+	for(i=1;i<=26;i++){
+		printf("%c\t",*p);
+		*p='A'+i;
+		if(i==20)
+			printf("\n");
+	}
+}
