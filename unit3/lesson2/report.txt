@@ -1,0 +1,211 @@
+3m.B@DESKTOP-4CM1KOG MINGW32 /e/lesson2
+$ arm-none-eabi-objdump -h app.o
+
+app.o:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000018  00000000  00000000  00000034  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  1 .data         00000064  00000000  00000000  0000004c  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  000000b0  2**0
+                  ALLOC
+  3 .debug_info   0000006c  00000000  00000000  000000b0  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  4 .debug_abbrev 0000005a  00000000  00000000  0000011c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_loc    0000002c  00000000  00000000  00000176  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_aranges 00000020  00000000  00000000  000001a2  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  7 .debug_line   00000035  00000000  00000000  000001c2  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  8 .debug_str    00000047  00000000  00000000  000001f7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .comment      00000012  00000000  00000000  0000023e  2**0
+                  CONTENTS, READONLY
+ 10 .ARM.attributes 00000032  00000000  00000000  00000250  2**0
+                  CONTENTS, READONLY
+ 11 .debug_frame  0000002c  00000000  00000000  00000284  2**2
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+
+3m.B@DESKTOP-4CM1KOG MINGW32 /e/lesson2
+$ arm-none-eabi-objdump.exe -h startup.o
+
+startup.o:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000000c  00000000  00000000  00000034  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000040  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000040  2**0
+                  ALLOC
+  3 .ARM.attributes 00000022  00000000  00000000  00000040  2**0
+                  CONTENTS, READONLY
+  4 .debug_line   00000039  00000000  00000000  00000062  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  5 .debug_info   0000003d  00000000  00000000  000000a0  2**0
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+  6 .debug_abbrev 00000014  00000000  00000000  000000e7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_aranges 00000020  00000000  00000000  00000100  2**3
+                  CONTENTS, RELOC, READONLY, DEBUGGING
+ 
+ 
+ to read symbols 
+                   arm-none-eabi-nm.exe app.o
+00000000 T main
+00000000 D string_buffer
+         U uart_send_massage
+         
+         
+    arm-none-eabi-nm.exe uart.o
+00000000 T uart_send_massage
+
+
+
+      arm-none-eabi-nm.exe startup.o
+         U main
+00000000 T reset
+00000008 t stop
+
+arm-none-eabi-objdump.exe -h learn-in-depth.elf
+
+learn-in-depth.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .startup      0000000c  00010000  00010000  00008000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .text         00000068  0001000c  0001000c  0000800c  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .data         00000064  00010074  00010074  00008074  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .ARM.attributes 0000002e  00000000  00000000  000080d8  2**0
+                  CONTENTS, READONLY
+  4 .comment      00000011  00000000  00000000  00008106  2**0
+                  CONTENTS, READONLY
+
+
+ arm-none-eabi-ld -T linker_script.ld -Map=output.map app.o uart.o startup.o -o learn-in-depth.elf
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+Mem              0x00000000         0x04000000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x00010000                . = 0x10000
+
+.startup        0x00010000        0xc
+ startup.o(.text)
+ .text          0x00010000        0xc startup.o
+                0x00010000                reset
+
+.text           0x0001000c       0x68
+ *(.text)
+ .text          0x0001000c       0x18 app.o
+                0x0001000c                main
+ .text          0x00010024       0x50 uart.o
+                0x00010024                uart_send_massage
+
+.glue_7         0x00010074        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x00010074        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x00010074        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x00010074        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x00010074        0x0
+ .iplt          0x00000000        0x0 startup.o
+
+.rel.dyn        0x00010074        0x0
+ .rel.iplt      0x00000000        0x0 startup.o
+
+.data           0x00010074       0x64
+ *(.data)
+ .data          0x00010074        0x0 startup.o
+ .data          0x00010074       0x64 app.o
+                0x00010074                string_buffer
+ .data          0x000100d8        0x0 uart.o
+
+.igot.plt       0x000100d8        0x0
+ .igot.plt      0x00000000        0x0 startup.o
+
+.bss            0x000100d8        0x0
+ *(.bss)
+ .bss           0x000100d8        0x0 startup.o
+ .bss           0x000100d8        0x0 app.o
+ .bss           0x000100d8        0x0 uart.o
+                0x000110d8                . = (. + 0x1000)
+                0x000110d8                stack_top = .
+LOAD app.o
+LOAD uart.o
+LOAD startup.o
+OUTPUT(learn-in-depth.elf elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x2e
+ .ARM.attributes
+                0x00000000       0x22 startup.o
+ .ARM.attributes
+                0x00000022       0x32 app.o
+ .ARM.attributes
+                0x00000054       0x32 uart.o
+
+.comment        0x00000000       0x11
+ .comment       0x00000000       0x11 app.o
+                                 0x12 (size before relaxing)
+ .comment       0x00000000       0x12 uart.o
+
+.debug_line     0x00000000       0xab
+ .debug_line    0x00000000       0x39 startup.o
+ .debug_line    0x00000039       0x35 app.o
+ .debug_line    0x0000006e       0x3d uart.o
+
+.debug_info     0x00000000      0x105
+ .debug_info    0x00000000       0x3d startup.o
+ .debug_info    0x0000003d       0x6c app.o
+ .debug_info    0x000000a9       0x5c uart.o
+
+.debug_abbrev   0x00000000       0xbf
+ .debug_abbrev  0x00000000       0x14 startup.o
+ .debug_abbrev  0x00000014       0x5a app.o
+ .debug_abbrev  0x0000006e       0x51 uart.o
+
+.debug_aranges  0x00000000       0x60
+ .debug_aranges
+                0x00000000       0x20 startup.o
+ .debug_aranges
+                0x00000020       0x20 app.o
+ .debug_aranges
+                0x00000040       0x20 uart.o
+
+.debug_loc      0x00000000       0x58
+ .debug_loc     0x00000000       0x2c app.o
+ .debug_loc     0x0000002c       0x2c uart.o
+
+.debug_str      0x00000000       0x60
+ .debug_str     0x00000000       0x47 app.o
+ .debug_str     0x00000047       0x19 uart.o
+                                 0x3e (size before relaxing)
+
+.debug_frame    0x00000000       0x54
+ .debug_frame   0x00000000       0x2c app.o
+ .debug_frame   0x0000002c       0x28 uart.o
+
+
+ 
+
+
+
