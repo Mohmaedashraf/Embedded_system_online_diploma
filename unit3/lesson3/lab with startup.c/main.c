@@ -20,8 +20,8 @@
 
 #include"typedef"
 #include"stdint.h"
-#define RCC_BASE   0X4002100
-#define GPIO_A  0X4010800
+#define RCC_BASE   0X40021000
+#define GPIO_A  0X40010800
 #define RCC_APB2ENR  *(vuint32_t*)(RCC_BASE+0X18)
 #define GPIA_CRH  *(vuint32_t*)(GPIO_A+0X04)
 #define  GPIA_ODR *(vuint32_t*)(GPIO_A+0X0C)
