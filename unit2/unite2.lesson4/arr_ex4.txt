@@ -1,0 +1,27 @@
+#include<stdio.h>
+
+void main (){
+	float a[5]={1,2,3,4,5};
+	float ins;
+	int loc;
+
+	int i,n ;
+	printf("entered the no  of element :");
+	fflush(stdin);fflush(stdout);
+	scanf("%d",&n);
+	for(i=0;i<5;i++){
+		printf("%.1f\t",a[i]);
+
+	}
+	printf("\nentered element to be inserted :");
+	fflush(stdin);fflush(stdout);
+	scanf("%f",&ins);
+	printf("enter the location :");
+	fflush(stdin);fflush(stdout);
+	scanf("%d",&loc);
+	a[loc]=ins;
+	for(i=0;i<5;i++){
+		printf("%.1f\t",a[i]);
+	}
+
+}

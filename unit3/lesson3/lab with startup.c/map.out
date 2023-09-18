@@ -20,13 +20,13 @@ Linker script and memory map
                 0x08000000                vectors
  *(.text*)
  .text          0x0800001c       0xbc startup.o
-                0x0800001c                Reset_handler
-                0x080000cc                default_handler
-                0x080000cc                Bus_fault
-                0x080000cc                Usage_fault_handler
-                0x080000cc                MM_fault_handler
-                0x080000cc                H_fault_handler
-                0x080000cc                NMI_handler
+                0x0800001c                Bus_fault
+                0x0800001c                default_handler
+                0x0800001c                H_fault_handler
+                0x0800001c                Usage_fault_handler
+                0x0800001c                MM_fault_handler
+                0x0800001c                NMI_handler
+                0x08000028                Reset_handler
  .text          0x080000d8       0xa8 main.o
                 0x080000d8                main
  *(.rodata)
@@ -81,13 +81,13 @@ LOAD startup.o
 LOAD main.o
 OUTPUT(learn-in-depth-cortex-m3.elf elf32-littlearm)
 
-.debug_info     0x00000000      0x2f1
- .debug_info    0x00000000      0x175 startup.o
- .debug_info    0x00000175      0x17c main.o
+.debug_info     0x00000000      0x2f3
+ .debug_info    0x00000000      0x176 startup.o
+ .debug_info    0x00000176      0x17d main.o
 
-.debug_abbrev   0x00000000      0x1a3
- .debug_abbrev  0x00000000       0xc0 startup.o
- .debug_abbrev  0x000000c0       0xe3 main.o
+.debug_abbrev   0x00000000      0x1a7
+ .debug_abbrev  0x00000000       0xc2 startup.o
+ .debug_abbrev  0x000000c2       0xe5 main.o
 
 .debug_loc      0x00000000       0x9c
  .debug_loc     0x00000000       0x64 startup.o
@@ -99,9 +99,9 @@ OUTPUT(learn-in-depth-cortex-m3.elf elf32-littlearm)
  .debug_aranges
                 0x00000020       0x20 main.o
 
-.debug_line     0x00000000      0x152
- .debug_line    0x00000000       0xac startup.o
- .debug_line    0x000000ac       0xa6 main.o
+.debug_line     0x00000000      0x154
+ .debug_line    0x00000000       0xae startup.o
+ .debug_line    0x000000ae       0xa6 main.o
 
 .debug_str      0x00000000      0x18d
  .debug_str     0x00000000      0x132 startup.o

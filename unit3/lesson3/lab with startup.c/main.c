@@ -33,20 +33,20 @@ typedef union {
 		vuint32_t p_13:1;
 	}pin;
 }r_odr_t;
-volatile r_odr_t*   r_odr=(volatile r_odr_t*)(GPIO_A+0X0C);
+volatile r_odr_t*   r_odr=(volatile r_odr_t*)(GPIO_A + 0X0C);
 unsigned char g_varibls[3]={1,2,3};
 unsigned char const const_varibls[3]={1,2,3};
 unsigned char bss_var[3];
-int main()
+int main(void)
 {
 	RCC_APB2ENR|=(1<<2);
 	GPIA_CRH&=0Xff0fffff;
 	GPIA_CRH|=0X00200000;
 	int i ;
 	while(1){
-		r_odr->pin.p_13=1;
-		for( i=0;i<5000;i++);
 		r_odr->pin.p_13=0;
+		for( i=0;i<5000;i++);
+		r_odr->pin.p_13=1;
 		for( i=0;i<5000;i++);
 	}
 	return 0 ;

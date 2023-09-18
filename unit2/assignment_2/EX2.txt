@@ -1,0 +1,31 @@
+#include <stdio.h>
+void main(){
+	char letter;
+	int i;
+	for(i=0; i<2 ; i++){
+		printf("\n enter the letter");
+		fflush(stdin);fflush(stdout);
+		scanf("%c",&letter);
+
+		switch(letter){
+		case 'a' :
+			printf("%c is vowel",letter);
+			break;
+		case 'e' :
+			printf("%c is vowel",letter);
+			break;
+		case 'i' :
+			printf("%c is vowel",letter);
+			break;
+		case 'o' :
+			printf("%c is vowel",letter);
+			break;
+		case 'u' :
+			printf("%c is vowel",letter);
+			break;
+		default :
+			printf("%c is consonant");
+			break;
+		}
+	}
+}

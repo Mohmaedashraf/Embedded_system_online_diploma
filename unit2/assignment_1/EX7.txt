@@ -1,0 +1,21 @@
+#include <stdio.h>
+void main(){
+	float a;
+	float b;
+	printf("Enter value of a:");
+	fflush(stdin);
+	fflush(stdout);
+	scanf("%f",&a);
+	printf("Enter value of b:");
+	fflush(stdin);
+	fflush(stdout);
+	scanf("%f",&b);
+	swap(&a,&b);
+	printf("After swapping, Value of a =%f\n",a);
+	printf("After swapping, Value of b =%f\n",b);
+}
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}

@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Ssum{
+	float real;
+	float imag;
+};
+struct Ssum read1(){
+	struct Ssum sum;
+	printf("for the first complex number\nenter real and imaginary respectively : ");
+	scanf("%f",&sum.real);
+	scanf("%f",&sum.imag);
+	return sum;
+}
+struct Ssum read2(){
+	struct Ssum sum;
+	printf("for the second complex number\nenter real and imaginary respectively : ");
+	scanf("%f",&sum.real);
+	scanf("%f",&sum.imag);
+	return sum;
+}
+struct Ssum print_sum(struct Ssum sum1,struct Ssum sum2 ){
+	struct Ssum sum;
+	sum.real=sum1.real+sum2.real;
+	sum.imag=sum1.imag+sum2.imag;
+
+	return sum;
+}
+void main() {
+	setbuf(stdout,NULL);
+	struct Ssum sum,sum1,sum2;
+	sum1=read1();
+	sum2=read2();
+	sum=print_sum(sum1,sum2);
+	if (sum.imag >0)
+		printf("sum = %.2f+j%.2f",sum.real,sum.real );
+	else
+		printf("sum = %.2f-j%.2f",sum.real,sum.real );
+}

@@ -1,0 +1,28 @@
+
+
+#include <stdio.h>
+#include <stdlib.h>
+void reverse(char word[100],int x);
+
+void main() {
+	setbuf(stdout,NULL);
+	int x;
+	printf("enter a sentence ");
+	fflush(stdin);fflush(stdout);
+	char word[100];
+	gets(word);
+	x=strlen(word);
+	reverse(word,x);
+
+}
+void reverse(char word[100],int x){
+	if(x>0){
+		printf("%c",word[x-1]);
+		reverse(word,x-1);
+	}
+}
+
+
+
+
+
