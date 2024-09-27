@@ -1,8 +1,0 @@
-#include <stdio.h>
-void main(){
-	int num ;
-	printf("Enter a integer: ");
-	fflush(stdin); fflush(stdout);
-	scanf("%d",&num);
-	printf(" you entered :%d",num);
-}
